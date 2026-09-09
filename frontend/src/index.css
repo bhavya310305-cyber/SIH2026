@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-saffron: var(--saffron);
+  --color-saffron-foreground: var(--saffron-foreground);
+
+  --color-violet: var(--violet);
+  --color-violet-foreground: var(--violet-foreground);
+
+  --color-teal: var(--teal);
+  --color-teal-foreground: var(--teal-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface-tint: var(--surface-tint);
+
+  --font-sans: var(--font-sans);
+}
+
+:root {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  --background: #ffffff;
+  --foreground: #1e293b;
+
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --primary-deep: #0b3d66;
+
+  --secondary: #f3f6fb;
+  --secondary-foreground: #0b3d66;
+
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+
+  --accent: #eef6ff;
+  --accent-foreground: #0b3d66;
+
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+
+  --saffron: #f59e0b;
+  --saffron-foreground: #ffffff;
+
+  --violet: #7c3aed;
+  --violet-foreground: #ffffff;
+
+  --teal: #0d9488;
+  --teal-foreground: #ffffff;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --surface-tint: #f8fbfd;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #2563eb;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    margin: 0;
+  }
+}
