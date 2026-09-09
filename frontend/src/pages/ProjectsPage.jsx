@@ -23,7 +23,10 @@ export default function ProjectsPage() {
         if (!active) return;
         const records = Array.isArray(response)
           ? response
-          : response?.data?.projects ?? response?.data ?? response?.projects ?? [];
+          : (response?.data?.projects ??
+            response?.data ??
+            response?.projects ??
+            []);
 
         setProjects(
           (Array.isArray(records) ? records : []).map((project) => ({
@@ -33,14 +36,13 @@ export default function ProjectsPage() {
             district: project.district,
             status: project.status ?? project.current_status,
             budget: project.budget ?? project.sanctioned_amount,
-          }))
+          })),
         );
       })
       .catch((requestError) => {
         if (active) {
           setError(
-            requestError.response?.data?.message ||
-              "Unable to load projects."
+            requestError.response?.data?.message || "Unable to load projects.",
           );
         }
       })
@@ -62,8 +64,7 @@ export default function ProjectsPage() {
       const districtMatch =
         district === "All Districts" || p.district === district;
 
-      const statusMatch =
-        status === "All Status" || p.status === status;
+      const statusMatch = status === "All Status" || p.status === status;
 
       return idMatch && districtMatch && statusMatch;
     });
@@ -78,20 +79,21 @@ export default function ProjectsPage() {
           </h1>
 
           <p className="mt-1 text-muted-foreground">
-            Monitor all sanctioned projects under your parliamentary constituency.
+            Monitor all sanctioned projects under your parliamentary
+            constituency.
           </p>
         </div>
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
         <FilterBar
-        search={search}
-        setSearch={setSearch}
-        district={district}
-        setDistrict={setDistrict}
-        status={status}
-        setStatus={setStatus}
-        projects={projects}
+          search={search}
+          setSearch={setSearch}
+          district={district}
+          setDistrict={setDistrict}
+          status={status}
+          setStatus={setStatus}
+          projects={projects}
         />
 
         <SummaryChips projects={projects} />

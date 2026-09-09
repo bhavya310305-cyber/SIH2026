@@ -1,22 +1,17 @@
-import {
-  IndianRupee,
-  Wallet,
-  CheckCircle2,
-  ShieldAlert,
-} from "lucide-react";
+import { IndianRupee, Wallet, CheckCircle2, ShieldAlert } from "lucide-react";
 
 export default function ConstituencyKPIs({ summary, loading }) {
   const KPIS = [
     {
       icon: IndianRupee,
-      value: loading ? "..." : summary.sanctionedAmount ?? "",
+      value: loading ? "..." : (summary.sanctionedAmount ?? ""),
       label: "Sanctioned",
       accent: "bg-primary",
       iconTone: "text-primary",
     },
     {
       icon: Wallet,
-      value: loading ? "..." : summary.expenditure ?? "",
+      value: loading ? "..." : (summary.expenditure ?? ""),
       label: "Expenditure",
       accent: "bg-primary",
       iconTone: "text-primary",
@@ -30,7 +25,7 @@ export default function ConstituencyKPIs({ summary, loading }) {
     },
     {
       icon: ShieldAlert,
-      value: loading ? "..." : summary.priorityAreas ?? "",
+      value: loading ? "..." : (summary.priorityAreas ?? ""),
       label: "Priority Areas",
       accent: "bg-destructive",
       iconTone: "text-destructive",
@@ -46,11 +41,7 @@ export default function ConstituencyKPIs({ summary, loading }) {
               className={`absolute left-0 top-0 h-[3px] w-full ${kpi.accent} opacity-80`}
             />
 
-            <kpi.icon
-              size={15}
-              className={kpi.iconTone}
-              strokeWidth={1.9}
-            />
+            <kpi.icon size={15} className={kpi.iconTone} strokeWidth={1.9} />
 
             <h3 className="mt-3 text-2xl font-bold text-primary-deep">
               {kpi.value}

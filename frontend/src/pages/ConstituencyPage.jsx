@@ -25,7 +25,7 @@ export default function ConstituencyPage() {
         if (active) {
           setError(
             requestError.response?.data?.message ||
-              "Unable to load constituency metrics."
+              "Unable to load constituency metrics.",
           );
         }
       })
@@ -43,7 +43,7 @@ export default function ConstituencyPage() {
     const matchingRisk = highRiskDistricts.find(
       (item) =>
         item.district?.trim().toUpperCase() ===
-        district.district?.trim().toUpperCase()
+        district.district?.trim().toUpperCase(),
     );
 
     return {
@@ -70,9 +70,12 @@ export default function ConstituencyPage() {
     <DashboardLayout>
       <div className="flex flex-col gap-6">
         <div>
-          <h1 className="text-2xl font-extrabold text-primary-deep">Constituency Overview</h1>
+          <h1 className="text-2xl font-extrabold text-primary-deep">
+            Constituency Overview
+          </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Monitor administrative areas and identify regions requiring priority attention.
+            Monitor administrative areas and identify regions requiring priority
+            attention.
           </p>
         </div>
 
@@ -81,7 +84,11 @@ export default function ConstituencyPage() {
         <ConstituencyKPIs summary={summaryData} loading={loading} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-          <AreaList areas={areas} selectedId={selectedId} onSelect={setSelectedId} />
+          <AreaList
+            areas={areas}
+            selectedId={selectedId}
+            onSelect={setSelectedId}
+          />
           {selectedArea && <AreaDetailPanel area={selectedArea} />}
         </div>
       </div>

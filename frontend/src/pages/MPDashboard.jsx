@@ -21,7 +21,7 @@ export default function MPDashboard() {
         if (active) {
           setError(
             requestError.response?.data?.message ||
-              "Unable to load monitoring metrics."
+              "Unable to load monitoring metrics.",
           );
         }
       })

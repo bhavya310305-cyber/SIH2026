@@ -1,16 +1,31 @@
-import {
-  FolderKanban,
-  CheckCircle2,
-  Clock3,
-  ShieldAlert,
-} from "lucide-react";
+import { FolderKanban, CheckCircle2, Clock3, ShieldAlert } from "lucide-react";
 
 export default function SummaryChips({ projects = [] }) {
   const chips = [
-    { label: `${projects.length} Total`, icon: FolderKanban, bg: "bg-blue-100", color: "text-blue-700" },
-    { label: `${projects.filter((project) => project.status === "Completed").length} Completed`, icon: CheckCircle2, bg: "bg-green-100", color: "text-green-700" },
-    { label: `${projects.filter((project) => project.status === "Ongoing").length} Ongoing`, icon: Clock3, bg: "bg-amber-100", color: "text-amber-700" },
-    { label: `${projects.filter((project) => project.status === "High Risk").length} High Risk`, icon: ShieldAlert, bg: "bg-red-100", color: "text-red-700" },
+    {
+      label: `${projects.length} Total`,
+      icon: FolderKanban,
+      bg: "bg-blue-100",
+      color: "text-blue-700",
+    },
+    {
+      label: `${projects.filter((project) => project.status === "Completed").length} Completed`,
+      icon: CheckCircle2,
+      bg: "bg-green-100",
+      color: "text-green-700",
+    },
+    {
+      label: `${projects.filter((project) => project.status === "Ongoing").length} Ongoing`,
+      icon: Clock3,
+      bg: "bg-amber-100",
+      color: "text-amber-700",
+    },
+    {
+      label: `${projects.filter((project) => project.status === "High Risk").length} High Risk`,
+      icon: ShieldAlert,
+      bg: "bg-red-100",
+      color: "text-red-700",
+    },
   ];
   return (
     <div className="flex flex-wrap gap-3">

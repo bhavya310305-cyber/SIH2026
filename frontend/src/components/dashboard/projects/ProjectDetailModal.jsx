@@ -23,8 +23,8 @@ export default function ProjectDetailModal({ project, onClose }) {
         if (!active) return;
         const updateData = response?.data ?? response;
         const updates = Array.isArray(updateData)
-          ? updateData[0] ?? null
-          : updateData?.latest_update ?? updateData?.update ?? updateData;
+          ? (updateData[0] ?? null)
+          : (updateData?.latest_update ?? updateData?.update ?? updateData);
         setRequest({ projectId, updates, error: "" });
       })
       .catch((requestError) => {
@@ -56,10 +56,10 @@ export default function ProjectDetailModal({ project, onClose }) {
     project.status === "Completed"
       ? "bg-green-100 text-green-700"
       : project.status === "High Risk"
-      ? "bg-red-100 text-red-700"
-      : project.status === "Ongoing"
-      ? "bg-amber-100 text-amber-700"
-      : "bg-blue-100 text-blue-700";
+        ? "bg-red-100 text-red-700"
+        : project.status === "Ongoing"
+          ? "bg-amber-100 text-amber-700"
+          : "bg-blue-100 text-blue-700";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
@@ -93,17 +93,11 @@ export default function ProjectDetailModal({ project, onClose }) {
               {project.status}
             </span>
 
-            <p className="text-sm text-muted-foreground">
-              {project.district}
-            </p>
+            <p className="text-sm text-muted-foreground">{project.district}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <Info
-              icon={MapPin}
-              label="Village"
-              value={project.village}
-            />
+            <Info icon={MapPin} label="Village" value={project.village} />
 
             <Info
               icon={Building2}
@@ -145,21 +139,24 @@ export default function ProjectDetailModal({ project, onClose }) {
           </div>
 
           {/* Images */}
-          {(updates?.photographs ?? updates?.photos ?? updates?.images)?.length > 0 && (
+          {(updates?.photographs ?? updates?.photos ?? updates?.images)
+            ?.length > 0 && (
             <div>
               <h3 className="mb-3 font-semibold text-primary-deep">
                 Project Images
               </h3>
 
               <div className="grid grid-cols-3 gap-3">
-                {(updates.photographs ?? updates.photos ?? updates.images).map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt="Project"
-                    className="h-28 w-full rounded-xl object-cover"
-                  />
-                ))}
+                {(updates.photographs ?? updates.photos ?? updates.images).map(
+                  (img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt="Project"
+                      className="h-28 w-full rounded-xl object-cover"
+                    />
+                  ),
+                )}
               </div>
             </div>
           )}

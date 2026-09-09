@@ -1,9 +1,4 @@
-import {
-  MapPin,
-  Home,
-  Building2,
-  ShieldAlert,
-} from "lucide-react";
+import { MapPin, Home, Building2, ShieldAlert } from "lucide-react";
 
 export default function AreaDetailPanel({ area }) {
   if (!area) return null;
@@ -16,18 +11,14 @@ export default function AreaDetailPanel({ area }) {
 
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
-  const offset =
-    circumference -
-    (area.completion / 100) * circumference;
+  const offset = circumference - (area.completion / 100) * circumference;
 
   return (
     <div className="h-full rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
       {/* Header */}
       <div className="flex items-start justify-between border-b border-border px-6 py-5">
         <div>
-          <h2 className="text-2xl font-bold text-primary-deep">
-            {area.name}
-          </h2>
+          <h2 className="text-2xl font-bold text-primary-deep">{area.name}</h2>
 
           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
             <MapPin size={15} />
@@ -43,8 +34,8 @@ export default function AreaDetailPanel({ area }) {
           {area.risk === "high"
             ? "High Risk"
             : area.risk === "medium"
-            ? "Medium Risk"
-            : "Low Risk"}
+              ? "Medium Risk"
+              : "Low Risk"}
         </span>
       </div>
 
@@ -68,9 +59,7 @@ export default function AreaDetailPanel({ area }) {
             />
 
             <StatColumn
-              icon={
-                <ShieldAlert size={20} className="text-red-600" />
-              }
+              icon={<ShieldAlert size={20} className="text-red-600" />}
               bg="bg-red-100"
               label="High-Risk Projects"
               value={area.highRisk}
@@ -79,10 +68,7 @@ export default function AreaDetailPanel({ area }) {
 
             <div className="flex flex-col items-center justify-center border-l border-border p-4">
               <div className="relative h-20 w-20">
-                <svg
-                  className="h-full w-full -rotate-90"
-                  viewBox="0 0 100 100"
-                >
+                <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
                   <circle
                     cx="50"
                     cy="50"
@@ -128,9 +114,7 @@ export default function AreaDetailPanel({ area }) {
           </div>
 
           <div>
-            <h3 className="text-base font-bold text-red-600">
-              AI Observation
-            </h3>
+            <h3 className="text-base font-bold text-red-600">AI Observation</h3>
 
             <p className="mt-1 text-sm leading-6 text-slate-700">
               {area.observation}
@@ -142,13 +126,7 @@ export default function AreaDetailPanel({ area }) {
   );
 }
 
-function StatColumn({
-  icon,
-  bg,
-  label,
-  value,
-  divider = false,
-}) {
+function StatColumn({ icon, bg, label, value, divider = false }) {
   return (
     <div
       className={`flex flex-col justify-center p-4 ${

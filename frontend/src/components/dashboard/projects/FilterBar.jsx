@@ -9,8 +9,12 @@ export default function FilterBar({
   setStatus,
   projects = [],
 }) {
-  const districts = [...new Set(projects.map((project) => project.district).filter(Boolean))];
-  const statuses = [...new Set(projects.map((project) => project.status).filter(Boolean))];
+  const districts = [
+    ...new Set(projects.map((project) => project.district).filter(Boolean)),
+  ];
+  const statuses = [
+    ...new Set(projects.map((project) => project.status).filter(Boolean)),
+  ];
 
   return (
     <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)]">
@@ -34,7 +38,9 @@ export default function FilterBar({
           className="h-11 rounded-lg border border-border bg-background px-3 text-sm outline-none"
         >
           <option>All Districts</option>
-          {districts.map((item) => <option key={item}>{item}</option>)}
+          {districts.map((item) => (
+            <option key={item}>{item}</option>
+          ))}
         </select>
 
         <select
@@ -43,18 +49,20 @@ export default function FilterBar({
           className="h-11 rounded-lg border border-border bg-background px-3 text-sm outline-none"
         >
           <option>All Status</option>
-          {statuses.map((item) => <option key={item}>{item}</option>)}
+          {statuses.map((item) => (
+            <option key={item}>{item}</option>
+          ))}
         </select>
 
         <button
-        onClick={() => {
+          onClick={() => {
             setSearch("");
             setDistrict("All Districts");
             setStatus("All Status");
-        }}
-        className="h-11 rounded-lg border border-border bg-white text-sm font-semibold text-primary-deep transition-all duration-200 hover:bg-slate-50"
+          }}
+          className="h-11 rounded-lg border border-border bg-white text-sm font-semibold text-primary-deep transition-all duration-200 hover:bg-slate-50"
         >
-        Reset Filters
+          Reset Filters
         </button>
       </div>
     </div>

@@ -2,10 +2,23 @@ import { Users, Home, Building2, IndianRupee } from "lucide-react";
 
 export default function ConstituencySnapshot({ metrics, loading }) {
   const METRICS = [
-    { icon: Users, value: metrics?.total_sanctioned_amount, label: "Sanctioned" },
+    {
+      icon: Users,
+      value: metrics?.total_sanctioned_amount,
+      label: "Sanctioned",
+    },
     { icon: Home, value: metrics?.total_estimated_cost, label: "Expenditure" },
-    { icon: Building2, value: metrics?.completion_percentage, label: "Completion", suffix: "%" },
-    { icon: IndianRupee, value: metrics?.high_risk_projects, label: "Priority Areas" },
+    {
+      icon: Building2,
+      value: metrics?.completion_percentage,
+      label: "Completion",
+      suffix: "%",
+    },
+    {
+      icon: IndianRupee,
+      value: metrics?.high_risk_projects,
+      label: "Priority Areas",
+    },
   ];
   return (
     <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
@@ -33,7 +46,8 @@ export default function ConstituencySnapshot({ metrics, loading }) {
             </div>
 
             <p className="text-xl font-bold text-primary-deep">
-                {loading ? "..." : metric.value ?? ""}{metric.suffix && !loading ? metric.suffix : ""}
+              {loading ? "..." : (metric.value ?? "")}
+              {metric.suffix && !loading ? metric.suffix : ""}
             </p>
 
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
