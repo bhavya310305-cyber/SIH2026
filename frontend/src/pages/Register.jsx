@@ -1,5 +1,4 @@
-
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -15,8 +14,6 @@ import {
   itemVariant,
 } from "../utils/authMotion";
 
-import api from "../api/axios";
-
 /*
  * Current platform roles.
  *
@@ -25,126 +22,18 @@ import api from "../api/axios";
  */
 const ROLES = [
   "MP",
-  "MP",
+  "Ministry",
   "District",
   "State",
 ];
 
 function Register() {
-  const navigate = useNavigate();
-
   const [role, setRole] = useState("MP");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-
-    constituency: "",
-    designation: "",
-
-    agencyName: "",
-    agencyType: "",
-
-    district: "",
-    state: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-
-    setError("");
-    setSuccess("");
-
-    // Password validation
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: role,
-
-        agency_name:
-          role === "Agency" ? formData.agencyName : null,
-
-        agency_type:
-          role === "Agency" ? formData.agencyType : null,
-
-        parliamentry_constituency:
-          role === "MP" ? formData.constituency : null,
-
-        designation:
-          role === "District" || role === "State"
-            ? formData.designation
-            : null,
-
-        district:
-          role === "District" || role === "Agency"
-            ? formData.district
-            : null,
-
-        state: formData.state,
-      };
-
-      console.log("Sending signup payload:", payload);
-
-      const response = await api.post("/auth/signup", payload);
-
-      console.log("Signup response:", response.data);
-
-      setSuccess(
-        "Registration successful. Your account is pending verification."
-      );
-
-      // Optional: redirect after a short delay
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-    } catch (err) {
-      console.error("Signup error:", err);
-
-      if (err.response) {
-        setError(
-          err.response.data?.message ||
-            "Registration failed."
-        );
-      } else if (err.request) {
-        setError(
-          "Unable to connect to the server. Make sure the backend is running."
-        );
-      } else {
-        setError("Something went wrong.");
-      }
-    } finally {
-      setLoading(false);
-    }
+    // Backend integration later
   };
 
   return (
@@ -160,7 +49,7 @@ function Register() {
         md:bg-primary-deep
       "
     >
-
+      {/* Background Image */}
       <img
         src="/images/image.png"
         alt="Parliament House of India"
@@ -178,6 +67,7 @@ function Register() {
         "
       />
 
+      {/* Back Button */}
       <Link
         to="/"
         className="
@@ -213,7 +103,6 @@ function Register() {
           py-6
         "
       >
-
         <motion.section
           variants={cardVariant}
           initial="hidden"
@@ -234,11 +123,9 @@ function Register() {
             backdrop-blur-[10px]
           "
         >
-
           {/* =====================================================
               HEADER
           ====================================================== */}
-
           <div
             className="
               shrink-0
@@ -248,7 +135,6 @@ function Register() {
               text-center
             "
           >
-
             <span
               className="
                 mx-auto
@@ -298,13 +184,11 @@ function Register() {
             >
               Applications are reviewed before account activation.
             </p>
-
           </div>
 
           {/* =====================================================
               ROLE SELECTOR
           ====================================================== */}
-
           <motion.div
             variants={itemVariant}
             initial="hidden"
@@ -321,7 +205,6 @@ function Register() {
               p-1
             "
           >
-
             {ROLES.map((r) => (
               <button
                 key={r}
@@ -345,13 +228,11 @@ function Register() {
                 {r}
               </button>
             ))}
-
           </motion.div>
 
           {/* =====================================================
               SCROLLABLE FORM ONLY
           ====================================================== */}
-
           <motion.form
             onSubmit={handleSubmit}
             variants={containerVariant}
@@ -370,21 +251,14 @@ function Register() {
               scrollbar-thumb-gray-300
             "
           >
-
-            {/* Name */}
-
             {/* Full Name */}
             <motion.div variants={itemVariant}>
               <Field
-                id="name"
+                id="fullName"
                 label="Full Name"
                 placeholder="Enter your full name"
-                value={formData.name}
-                onChange={handleChange}
               />
             </motion.div>
-
-            {/* Email */}
 
             {/* Email */}
             <motion.div variants={itemVariant}>
@@ -393,12 +267,8 @@ function Register() {
                 label="Official Email"
                 type="email"
                 placeholder="name@gov.in"
-                value={formData.email}
-                onChange={handleChange}
               />
             </motion.div>
-
-            {/* MP */}
 
             {/* ===================================================
                 MP FIELDS
@@ -415,15 +285,9 @@ function Register() {
                   id="constituency"
                   label="Parliamentary Constituency"
                   placeholder="Enter constituency"
-                  value={formData.constituency}
-                  onChange={handleChange}
                 />
               </motion.div>
             )}
-
-            {/* District */}
-
-            {/* District */}
 
             {/* ===================================================
                 DISTRICT AUTHORITY FIELDS
@@ -437,29 +301,19 @@ function Register() {
                 exit="hidden"
                 className="space-y-5"
               >
-
                 <Field
                   id="district"
                   label="District"
                   placeholder="Enter district"
-                  value={formData.district}
-                  onChange={handleChange}
                 />
 
                 <Field
                   id="designation"
                   label="Designation"
                   placeholder="Enter designation"
-                  value={formData.designation}
-                  onChange={handleChange}
                 />
-
               </motion.div>
             )}
-
-            {/* State */}
-
-            {/* State */}
 
             {/* ===================================================
                 STATE AUTHORITY FIELDS
@@ -476,74 +330,9 @@ function Register() {
                   id="designation"
                   label="Designation"
                   placeholder="Enter designation"
-                  value={formData.designation}
-                  onChange={handleChange}
                 />
               </motion.div>
             )}
-
-            {/* Agency */}
-
-            {role === "Agency" && (
-              <motion.div
-                key="agency"
-                variants={itemVariant}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                className="space-y-5"
-              >
-
-                <Field
-                  id="agencyName"
-                  label="Agency Name"
-                  placeholder="Enter agency name"
-                  value={formData.agencyName}
-                  onChange={handleChange}
-                />
-
-                <div>
-
-                  <label
-                    htmlFor="agencyType"
-                    className="mb-2 block text-sm font-semibold text-primary-deep"
-                  >
-                    Agency Type
-                  </label>
-
-                  <select
-                    id="agencyType"
-                    value={formData.agencyType}
-                    onChange={handleChange}
-                    className="h-12 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground outline-none focus:border-primary-deep focus:ring-1 focus:ring-primary-deep"
-                  >
-
-                    <option value="" disabled>
-                      Select agency type
-                    </option>
-
-                    {AGENCY_TYPES.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-
-                  </select>
-
-                </div>
-
-                <Field
-                  id="district"
-                  label="District"
-                  placeholder="Enter district"
-                  value={formData.district}
-                  onChange={handleChange}
-                />
-
-              </motion.div>
-            )}
-
-            {/* State */}
 
             {/* State */}
             <motion.div variants={itemVariant}>
@@ -551,14 +340,8 @@ function Register() {
                 id="state"
                 label="State"
                 placeholder="Enter state"
-                value={formData.state}
-                onChange={handleChange}
               />
             </motion.div>
-
-            {/* Password */}
-
-            {/* Password */}
 
             {/* Password */}
             <motion.div variants={itemVariant}>
@@ -567,14 +350,8 @@ function Register() {
                 label="Password"
                 type="password"
                 placeholder="Create a password"
-                value={formData.password}
-                onChange={handleChange}
               />
             </motion.div>
-
-            {/* Confirm Password */}
-
-            {/* Confirm Password */}
 
             {/* Confirm Password */}
             <motion.div variants={itemVariant}>
@@ -583,50 +360,11 @@ function Register() {
                 label="Confirm Password"
                 type="password"
                 placeholder="Re-enter your password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
               />
             </motion.div>
 
-            {/* Error */}
-
-            {error && (
-              <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
-                {error}
-              </div>
-            )}
-
-            {/* Success */}
-
-            {success && (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-700">
-                {success}
-              </div>
-            )}
-
-            {/* Account Status */}
-
-            {/* Error */}
-
-            {error && (
-              <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
-                {error}
-              </div>
-            )}
-
-            {/* Success */}
-
-            {success && (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-700">
-                {success}
-              </div>
-            )}
-
-            {/* Account Status */}
-
             {/* Verification Information */}
             <motion.div variants={itemVariant}>
-
               <div
                 className="
                   flex
@@ -638,7 +376,6 @@ function Register() {
                   p-4
                 "
               >
-
                 <Info
                   className="
                     mt-0.5
@@ -656,38 +393,28 @@ function Register() {
                     text-primary-deep
                   "
                 >
-
                   <span className="font-semibold">
                     Account Status: Pending Verification
                   </span>
 
                   <br />
 
-
                   Your application will be reviewed by the appropriate
                   authority before access is granted.
-
                 </p>
-
               </div>
-
             </motion.div>
-
-            {/* Submit */}
-
-            {/* Submit */}
 
             {/* Submit */}
             <motion.button
               variants={itemVariant}
               whileHover={{
-                scale: loading ? 1 : 1.02,
+                scale: 1.02,
               }}
               whileTap={{
-                scale: loading ? 1 : 0.98,
+                scale: 0.98,
               }}
               type="submit"
-              disabled={loading}
               className="
                 inline-flex
                 h-12
@@ -703,23 +430,17 @@ function Register() {
                 transition-colors
 
                 hover:bg-primary
-               disabled:cursor-not-allowed disabled:opacity-60"
+              "
             >
+              Submit Request
 
-              {loading ? "Submitting..." : "Submit Request"}
-
-              {!loading && (
-                <ArrowRight className="h-4 w-4" />
-              )}
-
+              <ArrowRight className="h-4 w-4" />
             </motion.button>
-
           </motion.form>
 
           {/* =====================================================
               FOOTER
           ====================================================== */}
-
           <div
             className="
               shrink-0
@@ -736,11 +457,9 @@ function Register() {
                 text-muted-foreground
               "
             >
-  
-            Already have an account?{" "}
+              Already have an account?{" "}
 
-  
-            <Link
+              <Link
                 to="/login"
                 className="
                   font-semibold
@@ -751,14 +470,10 @@ function Register() {
               >
                 Official Login
               </Link>
-  
-          </p>
+            </p>
           </div>
-
         </motion.section>
-
       </div>
-
     </main>
   );
 }
@@ -768,12 +483,9 @@ function Field({
   label,
   type = "text",
   placeholder,
-  value,
-  onChange,
 }) {
   return (
     <div>
-
       <label
         htmlFor={id}
         className="
@@ -791,9 +503,6 @@ function Field({
         id={id}
         type={type}
         placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required
         className="
           h-12
           w-full
@@ -813,10 +522,8 @@ function Field({
           focus:ring-primary-deep
         "
       />
-
     </div>
   );
 }
 
 export default Register;
-
