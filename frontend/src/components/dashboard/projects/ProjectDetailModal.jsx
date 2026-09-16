@@ -7,7 +7,7 @@ import {
   IndianRupee,
   FileText,
 } from "lucide-react";
-import { getProjectUpdates } from "../../../api/projectApi";
+import projectUpdatesMockData from "../../../data/projectUpdatesMockData";
 
 export default function ProjectDetailModal({ project, onClose }) {
   const [request, setRequest] = useState(null);
@@ -18,7 +18,9 @@ export default function ProjectDetailModal({ project, onClose }) {
     let active = true;
     const projectId = project.project_id ?? project.id;
 
-    getProjectUpdates(projectId)
+    Promise.resolve(
+      projectUpdatesMockData.find((item) => item.project_id === projectId),
+    )
       .then((response) => {
         if (!active) return;
         const updateData = response?.data ?? response;

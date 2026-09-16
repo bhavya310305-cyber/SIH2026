@@ -1,13 +1,13 @@
-import MPLayout from "../components/mp/MPLayout";
-import MPHero from "../components/mp/dashboard/MPHero";
-import MPKPICards from "../components/mp/dashboard/MPKPICards";
-import ProjectStatusOverview from "../components/mp/dashboard/ProjectStatusOverview";
-import FinancialProgress from "../components/mp/dashboard/FinancialProgress";
-import PriorityProjects from "../components/mp/dashboard/PriorityProjects";
-import ProjectsByDistrict from "../components/mp/dashboard/ProjectsByDistrict";
-import DevelopmentMessage from "../components/mp/dashboard/DevelopmentMessage";
+import MPLayout from "../../components/mp/MPLayout";
+import MPHero from "../../components/mp/dashboard/MPHero";
+import MPKPICards from "../../components/mp/dashboard/MPKPICards";
+import ProjectStatusOverview from "../../components/mp/dashboard/ProjectStatusOverview";
+import FinancialProgress from "../../components/mp/dashboard/FinancialProgress";
+import PriorityProjects from "../../components/mp/dashboard/PriorityProjects";
+import ProjectsByDistrict from "../../components/mp/dashboard/ProjectsByDistrict";
+import DevelopmentMessage from "../../components/mp/dashboard/DevelopmentMessage";
 
-import { mpDashboardMockData } from "../data/mpMockData";
+import { mpDashboardMockData } from "../../data/mpMockData";
 
 const MPDashboard = () => {
   const dashboardData = mpDashboardMockData;
@@ -33,6 +33,7 @@ const MPDashboard = () => {
             mt-[16px]
             grid grid-cols-2
             gap-[14px]
+
             max-lg:grid-cols-1
           "
         >
@@ -61,6 +62,7 @@ const MPDashboard = () => {
             mt-[16px]
             grid grid-cols-[1.25fr_0.75fr]
             gap-[14px]
+
             max-lg:grid-cols-1
           "
         >
